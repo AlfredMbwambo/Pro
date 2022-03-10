@@ -10,6 +10,7 @@ from Users.user_logic import teacher_registration
 from Users.user_logic import teacher_login
 from Users.user_logic import password_recovery
 from Users.user_logic import subject_registration
+from Users.user_logic import subject_teacher
 from Users.user_logic import darasa
 from Users.user_logic import stream
 
@@ -41,6 +42,9 @@ def API(request):
 
         if client_data['code'] == 106:
             response = darasa(client_data['data'])
+
+        if client_data['code'] == 107:
+            response = subject_teacher(client_data['data'])
 
 
 

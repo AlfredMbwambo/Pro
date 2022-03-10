@@ -5,6 +5,7 @@ from Users.models import Subject
 from Users.models import Teacher_subject
 from Users.models import Stream
 from Users.models import Darasa
+from Users.models import Student
 import json
 from django.contrib.auth.hashers import make_password, check_password
 
@@ -144,6 +145,32 @@ def darasa(data):
     else:
         return json.dumps({'code': 200,
                            "msg": "class is exists"})
+
+def Student(data):
+    for key in data.keys():
+        if not data[key]:
+            return json.dumps({'code': 200,
+                               "msg": key + " " + "is empty"})
+    if not Student.students.filter(registration_number=data["registration_number"]).exists():
+        new_student=Student()
+        new_student.student_id = uuid.uuid4()
+        new_student.first_name = data["first_name"]
+        new_student.middle_name = data["middle_name"]
+        new_student.last_name = data["last_name"]
+        new_student.standard = data["standard"]
+        new_student.registration_number = data["registration_number"]
+        new_student.phone_number = data["phone_number"]
+        new_student.email = data["email"]
+        new_student.password = data["password"]
+        new_student.save()
+        return json.dumps({'code': 200,
+                           "msg": "student registered"})
+    else:
+        return json.dumps({'code': 200,
+                           "msg": "registration number exists"})
+
+
+
 
 
 

@@ -32,7 +32,6 @@ class Teacher_subject(models.Model):
     subject_teacher_id = models.CharField(max_length=50, primary_key=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    registered = models.DateTimeField(auto_now_add=True)
     modifield_at = models.DateTimeField(auto_now=True)
 
     teacher_subjects = models.Manager()
